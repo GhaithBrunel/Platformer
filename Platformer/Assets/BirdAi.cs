@@ -5,14 +5,12 @@ using UnityEngine;
 public class BasicAI : MonoBehaviour
 {
     [SerializeField]
-    private Transform player;  // Reference to the player object
+    private Transform player;  
+    private float speed = 5.0f;  
     [SerializeField]
-    private float speed = 5.0f;  // Speed at which the AI follows the player
+    private LayerMask groundLayer;  
     [SerializeField]
-    private LayerMask groundLayer;  // Specify the ground layer
-    [SerializeField]
-    private Transform triggerPoint;  // Reference to the empty GameObject where the player triggers the bird to follow
-
+    private Transform triggerPoint;  
     private bool isFollowing = false;
     private Rigidbody2D rb;
     private Transform aiTransform;
@@ -27,7 +25,8 @@ public class BasicAI : MonoBehaviour
     {
         if (player != null)
         {
-            // If the player hits the trigger point, start following
+           
+
             if (!isFollowing && triggerPoint != null && triggerPoint.GetComponent<Collider2D>().IsTouching(player.GetComponent<Collider2D>()))
             {
                 isFollowing = true;
@@ -35,11 +34,11 @@ public class BasicAI : MonoBehaviour
 
             if (isFollowing)
             {
-                // Calculate the direction to the player
+   
                 Vector2 direction = player.position - aiTransform.position;
                 direction.Normalize();
 
-                // Flip the AI's sprite to face the player
+             
                 if (direction.x < 0)
                 {
                     aiTransform.localScale = new Vector3(Mathf.Abs(aiTransform.localScale.x), aiTransform.localScale.y, aiTransform.localScale.z); // Face right
@@ -49,23 +48,23 @@ public class BasicAI : MonoBehaviour
                     aiTransform.localScale = new Vector3(-Mathf.Abs(aiTransform.localScale.x), aiTransform.localScale.y, aiTransform.localScale.z); // Face left
                 }
 
-                // Perform a raycast to check for obstacles (using the specified layer)
+            
                 RaycastHit2D hit = Physics2D.Raycast(aiTransform.position, direction, 1.0f, groundLayer);
 
-                if (hit.collider != null)
+                if (hit.collider != null)  //doesnt work, needs a fix
                 {
-                    // An obstacle on the specified layer is detected, stop moving
+                   
                     rb.velocity = Vector2.zero;
                 }
                 else
                 {
-                    // No obstacle detected, move the AI toward the player
+                   
                     rb.velocity = direction * speed;
                 }
             }
             else
             {
-                // The AI is not following, so it should remain stationary
+               
                 rb.velocity = Vector2.zero;
             }
         }
