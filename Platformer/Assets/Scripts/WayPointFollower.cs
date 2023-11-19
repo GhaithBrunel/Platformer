@@ -12,7 +12,7 @@ public class WayPointFollower : MonoBehaviour
    
  private   void Update()
     {
-        if (Vector2.Distance(waypoints[currentWaypointIndex].transform.position,transform.position)< .1f)
+        if (Vector2.Distance(waypoints[currentWaypointIndex].transform.position,transform.position)< .1f) //follows player 
         {
             currentWaypointIndex++;
             if (currentWaypointIndex >= waypoints.Length)

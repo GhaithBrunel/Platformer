@@ -7,14 +7,18 @@ public class ItemCollector : MonoBehaviour
 {
     private int kiwis = 0;
     [SerializeField] private TextMeshProUGUI kiwisText;
+
     [SerializeField]  private AudioSource kiwisAudioSource;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Kiwi"))
         {
             kiwisAudioSource.Play();
+
             Destroy(collision.gameObject);
-            kiwis++;
+
+            kiwis++; // adds kiwis to text 
 
             kiwisText.text = "Kiwis: " + kiwis;
         }

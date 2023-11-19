@@ -54,11 +54,15 @@ public class Player_Movement : MonoBehaviour
         if (dirX > 0f)
         {
             state = MovementState.running;
-            sprite.flipX = false;
+            sprite.flipX = false; //flips animation 
         }
+
         else if (dirX < 0f)
+        
         {
+        
             state = MovementState.running;
+            
             sprite.flipX = true;
         }
         else
@@ -68,11 +72,10 @@ public class Player_Movement : MonoBehaviour
 
         if(rb.velocity.y > .1f)
         {
-            state = MovementState.jumping;
-        }
+            state = MovementState.jumping; }
         else if(rb.velocity.y < -.1f)
         {
-            state = MovementState.falling;
+            state = MovementState.falling; // falling animationsad
         }
 
 
@@ -81,8 +84,12 @@ public class Player_Movement : MonoBehaviour
     
 
     private bool IsGrounded()
+
     {
+
+
       return  Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, 1f, jumpableGround);
+    
     }
 
 

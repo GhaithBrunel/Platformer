@@ -46,6 +46,8 @@ public class Baby_Frog : MonoBehaviour
         {
             canJump = true;
             return true;
+
+            //baby frog
         }
 
         return false;
